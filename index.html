@@ -30,6 +30,7 @@
             color: var(--text-main);
             background-color: var(--primary-bg);
             line-height: 1.6;
+            overflow-x: hidden; /* Prevents horizontal scroll when menu opens */
         }
 
         a {
@@ -61,17 +62,21 @@
             background-color: #7a635b;
         }
 
-        /* --- Header --- */
+        /* --- Header & Navigation --- */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
+            padding: 15px 0;
             background-color: #fff;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative; /* Needed for mobile menu dropdown */
         }
 
         .logo {
@@ -80,6 +85,7 @@
             font-weight: 700;
             text-align: center;
             line-height: 1;
+            z-index: 101; /* Keeps logo above mobile menu */
         }
         
         .logo span {
@@ -90,16 +96,46 @@
             margin-top: 5px;
         }
 
-        nav ul {
+        /* Navigation Links */
+        .nav-menu {
+            display: flex;
+            flex: 1;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-menu ul {
             list-style: none;
             display: flex;
             gap: 30px;
             align-items: center;
         }
 
-        nav a {
+        .nav-menu a {
             font-size: 1rem;
             font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Hamburger Icon */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101; /* Keeps icon above mobile menu */
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: all 0.3s ease;
+            border-radius: 3px;
         }
 
         /* --- Hero Section --- */
@@ -185,7 +221,7 @@
             outline: none;
         }
 
-        /* --- About Section (New) --- */
+        /* --- About Section --- */
         .about-section {
             padding: 40px 0 60px;
             text-align: center;
@@ -333,11 +369,56 @@
             border-top: 1px solid #eee;
         }
 
-        /* Responsive */
+        /* --- Mobile Responsive Rules --- */
         @media (max-width: 768px) {
-            nav ul { display: none; }
+            .menu-toggle {
+                display: flex; /* Show hamburger icon */
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background-color: #fff;
+                flex-direction: column;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+            }
+
+            .nav-menu.active {
+                max-height: 400px; /* Expands menu */
+                padding: 20px 0;
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                width: 100%;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .nav-menu ul:last-child {
+                margin-top: 15px;
+            }
+
+            /* Hamburger Animation to 'X' */
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            /* Adjustments for other sections on mobile */
             .hero-content { text-align: center; margin: 0 auto; }
-            .hero::before { background: rgba(255,255,255,0.8); }
+            .hero::before { background: rgba(255,255,255,0.85); }
             .services-grid, .location-grid, .footer-grid { grid-template-columns: 1fr; }
             .booking-form { grid-template-columns: 1fr; }
         }
@@ -346,24 +427,31 @@
 <body>
 
     <header>
-        <div class="container" style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-            <nav style="flex: 1;">
-                <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#about">من نحن</a></li>
-                    <li><a href="#services">الخدمات</a></li>
-                </ul>
-            </nav>
+        <div class="container header-container">
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
             <div class="logo">
                 بيرل
                 <span>نيلز سبا</span>
             </div>
-            <nav style="flex: 1; justify-content: flex-end;">
-                <ul style="justify-content: flex-end;">
-                    <li><a href="#location">الموقع وساعات العمل</a></li>
-                    <li><a href="#booking"><button class="btn">احجزِ الآن</button></a></li>
+
+            <nav class="nav-menu" id="nav-menu">
+                <ul style="margin-left: auto;">
+                    <li><a href="#home" class="nav-link">الرئيسية</a></li>
+                    <li><a href="#about" class="nav-link">من نحن</a></li>
+                    <li><a href="#services" class="nav-link">الخدمات</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#location" class="nav-link">الموقع وساعات العمل</a></li>
+                    <li><a href="#booking" class="nav-link"><button class="btn">احجزِ الآن</button></a></li>
                 </ul>
             </nav>
+
         </div>
     </header>
 
@@ -531,7 +619,7 @@
 
                 <div class="map-box">
                     <p style="margin-bottom: 10px; font-weight: bold;">الدوادمي , البوليفارد</p>
-                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d907.3160383777278!2d44.44389906963586!3d24.545532198633534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15871d57d5f71a37%3A0xae64fe0df5f48008!2z2YXYtNi62YQg2KrYo9mE2YIg2KfZhNmE2KTZhNik2Kkg2YTZhNiq2LLZitmK2YYg2KfZhNmG2LPYp9im2YogLSBQZWFybCBuYWlsIHNwYQ!5e0!3m2!1sen!2ssa!4v1776449677509!5m2!1sen!2ssa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d907.3160383777278!2d44.44389906963586!3d24.545532198633534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15871d57d5f71a37%3A0xae64fe0df5f48008!2z2YXYtNi62YQg2KrYo9mE2YIg2KfZhNmE2KTZhNik2Kkg2YTZhNiq2LLZitmK2YYg2KfZhNmG2LPYp9im2YogLSBQZWFybCBuYWlsIHNwYQ!5e0!3m2!1sen!2ssa!4v1776449677509!5m2!1sen!2ssa" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     
                     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" alt="واجهة بيرال نيلز سبا" class="building-photo">
                     <p style="margin-top: 10px; color: var(--text-muted); font-style: italic;">تفضلي بزيارة ملاذنا الحديث.</p>
@@ -568,6 +656,7 @@
     </footer>
 
     <script>
+        // Form Logic
         const servicesData = {
             hair: [
                 "قص وتسريح الشعر", "صبغة وهايلايت", "صبغة بالياج", 
@@ -585,22 +674,18 @@
         categorySelect.addEventListener('change', function() {
             const category = this.value;
             
-            // Clear current options
             specificSelect.innerHTML = '';
 
             if (category && servicesData[category]) {
                 specificSelect.disabled = false;
                 
-                // Add default option
                 const defaultOpt = document.createElement('option');
                 defaultOpt.value = "";
                 defaultOpt.textContent = "اختر الخدمة المحددة";
                 specificSelect.appendChild(defaultOpt);
 
-                // Populate new options
                 servicesData[category].forEach(service => {
                     const opt = document.createElement('option');
-                    // Create a simple value identifier based on the index to avoid Arabic text in value attribute
                     opt.value = "service-" + Math.random().toString(36).substr(2, 5); 
                     opt.textContent = service;
                     specificSelect.appendChild(opt);
@@ -612,6 +697,25 @@
                 opt.textContent = "اختر الفئة أولاً";
                 specificSelect.appendChild(opt);
             }
+        });
+
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Toggle menu on click
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
         });
     </script>
 </body>
