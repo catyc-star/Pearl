@@ -22,7 +22,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth; /* Enables smooth scrolling when clicking links */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -30,7 +30,7 @@
             color: var(--text-main);
             background-color: var(--primary-bg);
             line-height: 1.6;
-            overflow-x: hidden; /* Prevents horizontal scroll when menu opens */
+            overflow-x: hidden;
         }
 
         a {
@@ -62,7 +62,7 @@
             background-color: #7a635b;
         }
 
-        /* --- Header & Navigation --- */
+        /* --- Header & Navigation (Universal Mobile Layout) --- */
         header {
             padding: 15px 0;
             background-color: #fff;
@@ -74,36 +74,53 @@
 
         .header-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Centers the logo */
             align-items: center;
-            position: relative; /* Needed for mobile menu dropdown */
+            position: relative; 
         }
 
-        /* --- Updated Logo Section with Watermark --- */
+        /* Mobile Hamburger Icon - Now visible everywhere */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101; 
+            position: absolute;
+            right: 20px; /* Anchors menu button to the right */
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        /* Logo Section */
         .logo {
-            position: relative; /* Needed to keep the background inside */
+            position: relative; 
             font-family: var(--font-heading);
             font-size: 2rem;
             font-weight: 700;
             text-align: center;
             line-height: 1;
-            z-index: 101; /* Keeps logo above mobile menu */
-            padding: 15px 30px; /* Adds space around text so logo fits */
+            z-index: 101; 
+            padding: 15px 30px; 
         }
 
-        /* This creates the image layer behind the text */
         .logo::before {
             content: '';
             position: absolute;
             top: 50%; 
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70px; /* Adjust size of your logo */
+            width: 70px; 
             height: 70px;
-            /* Replace this URL with your actual logo file later */
-            background: url('') center/contain no-repeat;
-            opacity: 0.12; /* Adjust opacity for darker/lighter watermark */
-            z-index: -1; /* Pushes the image behind the text */
+            background: url('https://cdn-icons-png.flaticon.com/512/1973/1973719.png') center/contain no-repeat;
+            opacity: 0.12; 
+            z-index: -1; 
         }
         
         .logo span {
@@ -114,23 +131,43 @@
             margin-top: 5px;
         }
 
-        /* Navigation Links */
+        /* Navigation Links (Dropdown) */
         .nav-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            background-color: #fff;
             display: flex;
-            flex: 1;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+            z-index: 99;
+        }
+
+        .nav-menu.active {
+            max-height: 500px; 
+            padding: 20px 0;
         }
 
         .nav-menu ul {
             list-style: none;
             display: flex;
-            gap: 30px;
-            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .nav-menu ul:last-child {
+            margin-top: 15px;
         }
 
         .nav-menu a {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             transition: color 0.3s ease;
         }
@@ -139,21 +176,15 @@
             color: var(--accent-color);
         }
 
-        /* Mobile Hamburger Icon */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 101; /* Keeps icon above mobile menu */
+        /* Hamburger Animation */
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
         }
-
-        .menu-toggle .bar {
-            width: 25px;
-            height: 3px;
-            background-color: var(--text-main);
-            transition: all 0.3s ease;
-            border-radius: 3px;
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
         }
 
         /* --- Hero Section --- */
@@ -176,6 +207,8 @@
             position: relative;
             z-index: 1;
             max-width: 500px;
+            text-align: center; /* Centered for all views */
+            margin: 0 auto;
         }
 
         .hero h1 {
@@ -199,7 +232,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border-radius: 4px;
             max-width: 1000px;
-            margin: -60px auto 60px; /* Overlaps hero */
+            margin: -60px auto 60px;
             position: relative;
             z-index: 10;
         }
@@ -287,6 +320,7 @@
         .service-item {
             display: flex;
             margin-bottom: 25px;
+            align-items: flex-start;
         }
 
         .service-icon {
@@ -297,7 +331,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 15px; /* Changed for RTL */
+            margin-left: 15px;
             flex-shrink: 0;
         }
 
@@ -305,9 +339,28 @@
             width: 20px; fill: var(--text-muted);
         }
 
+        .service-text {
+            width: 100%;
+        }
+
+        .service-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed #e0e0e0;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+        }
+
         .service-text h4 {
             font-size: 1.1rem;
-            margin-bottom: 4px;
+            margin: 0;
+        }
+
+        .service-price {
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.1rem;
         }
 
         .service-text p {
@@ -387,55 +440,8 @@
             border-top: 1px solid #eee;
         }
 
-        /* --- Mobile Responsive Rules --- */
+        /* --- Mobile Responsiveness Adjustments --- */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex; /* Show hamburger icon */
-            }
-
-            .nav-menu {
-                position: absolute;
-                top: 100%;
-                right: 0;
-                width: 100%;
-                background-color: #fff;
-                flex-direction: column;
-                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-                padding: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease-in-out;
-            }
-
-            .nav-menu.active {
-                max-height: 400px; /* Expands menu */
-                padding: 20px 0;
-            }
-
-            .nav-menu ul {
-                flex-direction: column;
-                width: 100%;
-                gap: 20px;
-                text-align: center;
-            }
-
-            .nav-menu ul:last-child {
-                margin-top: 15px;
-            }
-
-            /* Hamburger Animation to 'X' */
-            .menu-toggle.active .bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-            .menu-toggle.active .bar:nth-child(2) {
-                opacity: 0;
-            }
-            .menu-toggle.active .bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
-
-            /* Adjustments for other sections on mobile */
-            .hero-content { text-align: center; margin: 0 auto; }
             .hero::before { background: rgba(255,255,255,0.85); }
             .services-grid, .location-grid, .footer-grid { grid-template-columns: 1fr; }
             .booking-form { grid-template-columns: 1fr; }
@@ -459,7 +465,7 @@
             </div>
 
             <nav class="nav-menu" id="nav-menu">
-                <ul style="margin-left: auto;">
+                <ul>
                     <li><a href="#home" class="nav-link">الرئيسية</a></li>
                     <li><a href="#about" class="nav-link">من نحن</a></li>
                     <li><a href="#services" class="nav-link">الخدمات</a></li>
@@ -478,18 +484,18 @@
             <div class="hero-content">
                 <h1>تألقكِ،<br>إبداعنا.</h1>
                 <p>بيرل نيلز سبا. التميز في الأناقة.</p>
-                <a href="#services"><button class="btn">استكشفِ الخدمات</button></a>
+                <a href="#booking"><button class="btn">احجزي موعدك</button></a>
             </div>
         </div>
     </section>
 
     <div class="container">
         <div class="booking-panel" id="booking">
-            <h3>احجزي موعدكِ لتتألقي</h3>
-            <form class="booking-form" onsubmit="event.preventDefault();">
+            <h3>احجزي موعدكِ والدفع إلكترونياً</h3>
+            <form class="booking-form" onsubmit="event.preventDefault(); alert('عفواً، سيتم توجيهك لبوابة الدفع في النسخة النهائية.');">
                 <div class="form-group">
                     <label>نوع الخدمة</label>
-                    <select id="service-category">
+                    <select id="service-category" required>
                         <option value="">اختر الفئة</option>
                         <option value="hair">خدمات الشعر</option>
                         <option value="nails">خدمات الأظافر</option>
@@ -497,20 +503,23 @@
                 </div>
                 <div class="form-group">
                     <label>الخدمة المحددة</label>
-                    <select id="specific-service" disabled>
+                    <select id="specific-service" disabled required>
                         <option value="">اختر الفئة أولاً</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>التاريخ المفضل</label>
-                    <input type="date">
+                    <label>التاريخ والوقت</label>
+                    <input type="datetime-local" required>
                 </div>
                 <div class="form-group">
-                    <label>الوقت المتاح</label>
-                    <input type="time">
+                    <label>طريقة الدفع</label>
+                    <select id="payment-method" required>
+                        <option value="online">الدفع الإلكتروني (مدى، أبل باي، فيزا)</option>
+                        <option value="cash">الدفع في الصالون</option>
+                    </select>
                 </div>
                 <div class="form-group" style="justify-content: flex-end;">
-                    <button class="btn" type="submit" style="height: 43px;">تأكيد الحجز</button>
+                    <button class="btn" type="submit" style="height: 43px;">المتابعة للدفع والتأكيد</button>
                 </div>
             </form>
         </div>
@@ -522,7 +531,7 @@
     </section>
 
     <section class="services-section container" id="services">
-        <h2>خدماتنا</h2>
+        <h2>خدماتنا وأسعارنا</h2>
         <div class="services-grid">
             
             <div class="service-category">
@@ -531,15 +540,21 @@
                 <div class="service-item">
                     <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
                     <div class="service-text">
-                        <h4>قص وتسريح الشعر</h4>
-                        <p>قص وتسريح مخصص باستخدام تقنيات احترافية لإبراز الملامح.</p>
+                        <div class="service-title-row">
+                            <h4>قص وتسريح الشعر</h4>
+                            <span class="service-price">١٥٠ ر.س</span>
+                        </div>
+                        <p>قص وتسريح مخصص باستخدام تقنيات احترافية لإبراز ملامحك.</p>
                     </div>
                 </div>
 
                 <div class="service-item">
                     <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
                     <div class="service-text">
-                        <h4>صبغة وهايلايت</h4>
+                        <div class="service-title-row">
+                            <h4>صبغة وهايلايت</h4>
+                            <span class="service-price">٣٥٠ ر.س</span>
+                        </div>
                         <p>علاجات لونية بأبعاد متعددة، هايلايت كامل، وتجديد لون الجذور.</p>
                     </div>
                 </div>
@@ -547,7 +562,10 @@
                 <div class="service-item">
                     <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
                     <div class="service-text">
-                        <h4>صبغة بالياج</h4>
+                        <div class="service-title-row">
+                            <h4>صبغة بالياج</h4>
+                            <span class="service-price">٤٥٠ ر.س</span>
+                        </div>
                         <p>هايلايت مرسوم يدوياً لمظهر طبيعي ولمسة ساحرة.</p>
                     </div>
                 </div>
@@ -555,24 +573,11 @@
                 <div class="service-item">
                     <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
                     <div class="service-text">
-                        <h4>ترطيب عميق</h4>
+                        <div class="service-title-row">
+                            <h4>ترطيب عميق</h4>
+                            <span class="service-price">١٢٠ ر.س</span>
+                        </div>
                         <p>ماسكات مجددة لإصلاح التلف واستعادة لمعان الشعر.</p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
-                    <div class="service-text">
-                        <h4>سيشوار (Blowout)</h4>
-                        <p>غسيل وتسريح احترافي لكثافة ونعومة فائقة.</p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
-                    <div class="service-text">
-                        <h4>تسريحات المناسبات</h4>
-                        <p>تسريحات أنيقة ومبتكرة للمناسبات الخاصة.</p>
                     </div>
                 </div>
             </div>
@@ -583,7 +588,10 @@
                 <div class="service-item">
                     <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg></div>
                     <div class="service-text">
-                        <h4>مانيكير كلاسيكي</h4>
+                        <div class="service-title-row">
+                            <h4>مانيكير كلاسيكي</h4>
+                            <span class="service-price">٨٠ ر.س</span>
+                        </div>
                         <p>العناية بالجلد الميت، تشكيل الأظافر، ووضع طلاء الأظافر التقليدي.</p>
                     </div>
                 </div>
@@ -591,7 +599,10 @@
                 <div class="service-item">
                     <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg></div>
                     <div class="service-text">
-                        <h4>باديكير كلاسيكي</h4>
+                        <div class="service-title-row">
+                            <h4>باديكير كلاسيكي</h4>
+                            <span class="service-price">١٠٠ ر.س</span>
+                        </div>
                         <p>نقع مريح، تقشير، مساج، وتلميع دقيق للأظافر.</p>
                     </div>
                 </div>
@@ -599,7 +610,10 @@
                 <div class="service-item">
                     <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg></div>
                     <div class="service-text">
-                        <h4>تركيب أظافر (إكستنشن)</h4>
+                        <div class="service-title-row">
+                            <h4>تركيب أظافر (إكستنشن)</h4>
+                            <span class="service-price">٢٠٠ ر.س</span>
+                        </div>
                         <p>إضافات أكريليك أو جل بيلدر لمزيد من الطول والمتانة.</p>
                     </div>
                 </div>
@@ -607,16 +621,11 @@
                 <div class="service-item">
                     <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg></div>
                     <div class="service-text">
-                        <h4>رسم وتزيين الأظافر</h4>
+                        <div class="service-title-row">
+                            <h4>رسم وتزيين الأظافر</h4>
+                            <span class="service-price">٥٠ ر.س</span>
+                        </div>
                         <p>تصاميم مخصصة، طلاء كروم، وتفاصيل دقيقة فنية.</p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg></div>
-                    <div class="service-text">
-                        <h4>إصلاح الأظافر</h4>
-                        <p>معالجة التشققات أو الأظافر المكسورة لاستعادة شكلها المثالي.</p>
                     </div>
                 </div>
             </div>
@@ -717,18 +726,16 @@
             }
         });
 
-        // Mobile Menu Logic
+        // Mobile Menu Logic (Now active on all screens)
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
         const navLinks = document.querySelectorAll('.nav-link');
 
-        // Toggle menu on click
         mobileMenu.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
-        // Close menu when a link is clicked
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
