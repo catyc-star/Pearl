@@ -79,13 +79,31 @@
             position: relative; /* Needed for mobile menu dropdown */
         }
 
+        /* --- Updated Logo Section with Watermark --- */
         .logo {
+            position: relative; /* Needed to keep the background inside */
             font-family: var(--font-heading);
             font-size: 2rem;
             font-weight: 700;
             text-align: center;
             line-height: 1;
             z-index: 101; /* Keeps logo above mobile menu */
+            padding: 15px 30px; /* Adds space around text so logo fits */
+        }
+
+        /* This creates the image layer behind the text */
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px; /* Adjust size of your logo */
+            height: 70px;
+            /* Replace this URL with your actual logo file later */
+            background: url('https://cdn-icons-png.flaticon.com/512/1973/1973719.png') center/contain no-repeat;
+            opacity: 0.12; /* Adjust opacity for darker/lighter watermark */
+            z-index: -1; /* Pushes the image behind the text */
         }
         
         .logo span {
