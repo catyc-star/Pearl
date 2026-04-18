@@ -77,7 +77,6 @@
             align-items: center;
         }
 
-        /* Menu Button (Right) */
         .menu-toggle {
             display: flex;
             flex-direction: column;
@@ -95,7 +94,6 @@
             border-radius: 3px;
         }
 
-        /* Logo Image (Center) */
         .logo-img-container {
             flex: 1;
             display: flex;
@@ -103,11 +101,10 @@
         }
 
         .center-logo {
-            width: 100px; /* حجم اللوجو */
+            width: 100px;
             height: auto;
         }
 
-        /* Site Name (Left) */
         .site-name {
             flex: 1;
             font-family: var(--font-heading);
@@ -171,16 +168,9 @@
             color: var(--accent-color);
         }
 
-        /* Hamburger Animation */
-        .menu-toggle.active .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        .menu-toggle.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .menu-toggle.active .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
+        .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+        .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
         /* --- Hero Section --- */
         .hero {
@@ -252,7 +242,7 @@
         }
 
         .form-group.full-width {
-            grid-column: 1 / -1; /* يأخذ العرض كامل */
+            grid-column: 1 / -1; 
         }
 
         .form-group label {
@@ -271,7 +261,6 @@
             outline: none;
         }
 
-        /* Checkbox Services List */
         .services-list {
             background: var(--secondary-bg);
             padding: 15px;
@@ -285,10 +274,12 @@
             font-family: var(--font-heading);
             font-weight: 700;
             color: var(--accent-color);
-            margin: 10px 0 5px;
+            margin: 15px 0 5px;
             border-bottom: 1px solid #ddd;
             padding-bottom: 5px;
         }
+        
+        .category-title:first-child { margin-top: 0; }
 
         .checkbox-label {
             display: flex;
@@ -335,22 +326,30 @@
             text-align: right;
         }
 
+        .service-category {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
         .service-category h3 {
             font-size: 1.4rem;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--accent-color);
             padding-bottom: 10px;
+            display: inline-block;
         }
 
         .service-item {
             display: flex;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             align-items: flex-start;
         }
 
         .service-icon {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             background: var(--secondary-bg);
             border-radius: 50%;
             display: flex;
@@ -358,11 +357,10 @@
             justify-content: center;
             margin-left: 15px;
             flex-shrink: 0;
+            margin-top: 3px;
         }
 
-        .service-icon svg {
-            width: 20px; fill: var(--text-muted);
-        }
+        .service-icon svg { width: 14px; fill: var(--accent-color); }
 
         .service-text { width: 100%; }
 
@@ -372,23 +370,25 @@
             align-items: center;
             border-bottom: 1px dashed #e0e0e0;
             padding-bottom: 5px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .service-text h4 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin: 0;
+            color: var(--text-main);
         }
 
         .service-price {
             font-weight: 700;
-            color: var(--accent-color);
-            font-size: 1.1rem;
+            color: var(--text-main);
+            font-size: 1.05rem;
         }
 
         .service-text p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
+            margin-top: 5px;
         }
 
         /* --- Others --- */
@@ -496,82 +496,9 @@
     </section>
 
     <section class="services-section container" id="services">
-        <h2>خدماتنا وأسعارنا</h2>
-        <div class="services-grid">
+        <h2>قائمة الخدمات والأسعار</h2>
+        <div class="services-grid" id="visual-services-grid">
             
-            <div class="service-category">
-                <h3>خدمات الشعر</h3>
-                
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
-                    <div class="service-text">
-                        <div class="service-title-row">
-                            <h4>قص وتسريح الشعر</h4>
-                            <span class="service-price">١٥٠ ر.س</span>
-                        </div>
-                        <p>قص وتسريح مخصص باستخدام تقنيات احترافية لإبراز ملامحك.</p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
-                    <div class="service-text">
-                        <div class="service-title-row">
-                            <h4>صبغة وهايلايت</h4>
-                            <span class="service-price">٣٥٠ ر.س</span>
-                        </div>
-                        <p>علاجات لونية بأبعاد متعددة، هايلايت كامل، وتجديد لون الجذور.</p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle></svg></div>
-                    <div class="service-text">
-                        <div class="service-title-row">
-                            <h4>ترطيب عميق</h4>
-                            <span class="service-price">١٢٠ ر.س</span>
-                        </div>
-                        <p>ماسكات مجددة لإصلاح التلف واستعادة لمعان الشعر.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="service-category">
-                <h3>خدمات الأظافر</h3>
-                
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg></div>
-                    <div class="service-text">
-                        <div class="service-title-row">
-                            <h4>مانيكير كلاسيكي</h4>
-                            <span class="service-price">٨٠ ر.س</span>
-                        </div>
-                        <p>العناية بالجلد الميت، تشكيل الأظافر، ووضع طلاء الأظافر التقليدي.</p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg></div>
-                    <div class="service-text">
-                        <div class="service-title-row">
-                            <h4>تركيب أظافر (إكستنشن)</h4>
-                            <span class="service-price">٢٠٠ ر.س</span>
-                        </div>
-                        <p>إضافات أكريليك أو جل بيلدر لمزيد من الطول والمتانة.</p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg></div>
-                    <div class="service-text">
-                        <div class="service-title-row">
-                            <h4>رسم وتزيين الأظافر</h4>
-                            <span class="service-price">٥٠ ر.س</span>
-                        </div>
-                        <p>تصاميم مخصصة، طلاء كروم، وتفاصيل دقيقة فنية.</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -623,40 +550,82 @@
     </footer>
 
     <script>
-        // 1. Data for Services with Prices
+        // 1. القائمة الفعلية للخدمات والأسعار بناءً على المنيو المرفق
         const allServices = [
-            { category: 'خدمات الشعر', items: [
-                { id: 'h1', name: 'قص وتسريح الشعر', price: 150 },
-                { id: 'h2', name: 'صبغة وهايلايت', price: 350 },
-                { id: 'h3', name: 'صبغة بالياج', price: 450 },
-                { id: 'h4', name: 'ترطيب عميق', price: 120 },
-                { id: 'h5', name: 'سيشوار', price: 80 },
-                { id: 'h6', name: 'تسريحات المناسبات', price: 250 }
+            { category: 'خدمات اليدين', items: [
+                { name: 'إصلاح سريع لليدين', desc: 'إزالة الجلد الميت وترتيب الأظافر', price: 50 },
+                { name: 'كلاسيك منيكير', desc: '', price: 80 },
+                { name: 'منيكير روسي', desc: 'تقنية التنظيف الجاف بإستخدام المبرد الكهربائي', price: 110 },
+                { name: 'تريتمنت علاجي للأيدي الجافة', desc: 'منتجات عالية الأداء لأيدي صحية', price: 130 },
+                { name: 'تريتمنت علاجي للتصبغات', desc: 'منتجات للعناية باليدين وتوحيد اللون', price: 150 },
+                { name: 'اضافة قفاز برافين', desc: '', price: 86 }
             ]},
-            { category: 'خدمات الأظافر', items: [
-                { id: 'n1', name: 'مانيكير كلاسيكي', price: 80 },
-                { id: 'n2', name: 'باديكير كلاسيكي', price: 100 },
-                { id: 'n3', name: 'تركيب أظافر (إكستنشن)', price: 200 },
-                { id: 'n4', name: 'رسم وتزيين الأظافر', price: 50 },
-                { id: 'n5', name: 'إصلاح الأظافر', price: 30 }
+            { category: 'خدمات القدمين', items: [
+                { name: 'إصلاح سريع للقدمين', desc: 'إزالة الجلد الميت وترتيب الأظافر بدون حك', price: 50 },
+                { name: 'كلاسيك بديكير', desc: '', price: 90 },
+                { name: 'كلاسيك بديكير مع جل كرستالي', desc: 'قوام هلامي يساعد على الترطيب', price: 100 },
+                { name: 'تريتمنت لعلاج تشققات الاقدام', desc: 'باستخدام المبرد الكهربائي للترطيب', price: 165 },
+                { name: 'تنظيف روسي للقدمين', desc: 'تقنية التنظيف الجاف والحك الباطن', price: 150 },
+                { name: 'تنظيف روسي أظافر فقط', desc: 'غير شامل الحك', price: 100 },
+                { name: 'إضافة المبرد الكهربائي', desc: '', price: 35 }
+            ]},
+            { category: 'خدمات يدين وقدمين', items: [
+                { name: 'بديكير ومنيكر', desc: 'شامل برافين لليدين ومساج للأكتاف', price: 390 },
+                { name: 'جلسة تبييض ركب وأكواع', desc: '', price: 60 },
+                { name: 'إضافة سكراب', desc: '', price: 10 }
+            ]},
+            { category: 'خدمات المناكير', items: [
+                { name: 'مناكير لون واحد', desc: '', price: 10 },
+                { name: 'مناكير لون عادي eissie', desc: '', price: 30 },
+                { name: 'مناكير فرنسي', desc: '', price: 40 },
+                { name: 'مناكير اومبريه', desc: '', price: 70 },
+                { name: 'مناكير جل يدوم ٢٠ يوم', desc: '', price: 80 },
+                { name: 'إزالة مناكير جل', desc: '', price: 40 },
+                { name: 'مناكير جل فرنسي', desc: '', price: 100 },
+                { name: 'مناكير كات آي', desc: '', price: 100 },
+                { name: 'نيل أرت (الأصبع)', desc: '', price: 10 },
+                { name: 'ستيكر أظافر (الأصبع)', desc: '', price: 5 }
+            ]},
+            { category: 'خدمات الجل وتركيب الأظافر', items: [
+                { name: 'جل اكستنشن', desc: '', price: 350 },
+                { name: 'رتوش جل اكستنشن', desc: '', price: 200 },
+                { name: 'إزالة جل اكستنشن', desc: '', price: 120 },
+                { name: 'تركيب أظافر مع لون عادي', desc: '', price: 100 },
+                { name: 'تركيب أظافر بدون لون', desc: '', price: 80 },
+                { name: 'إزالة أظافر تركيب', desc: '', price: 20 },
+                { name: 'أظفر (بالحبة)', desc: '', price: 10 }
+            ]},
+            { category: 'خدمات الحواجب والرموش', items: [
+                { name: 'تشقير حواجب', desc: '', price: 30 },
+                { name: 'صبغة حواجب', desc: '', price: 30 },
+                { name: 'تركيب رموش أسبوعية كاملة', desc: '', price: 100 },
+                { name: 'تركيب رموش أسبوعية طرف', desc: '', price: 60 },
+                { name: 'ليفتنق حواجب', desc: '', price: 120 },
+                { name: 'ليفتنق رموش', desc: '', price: 120 }
             ]}
         ];
 
-        // 2. Generate Checkboxes dynamically
+        // 2. توليد نموذج الحجز (صناديق الاختيار)
         const servicesContainer = document.getElementById('services-checkboxes');
+        const visualGrid = document.getElementById('visual-services-grid');
         
         allServices.forEach(categoryObj => {
-            // Add category title
+            // إضافة العناوين لنموذج الحجز
             const title = document.createElement('div');
             title.className = 'category-title';
             title.textContent = categoryObj.category;
             servicesContainer.appendChild(title);
 
-            // Add checkboxes for this category
+            // تجهيز القسم الخاص بالعرض المرئي للأسفل
+            const visualCategory = document.createElement('div');
+            visualCategory.className = 'service-category';
+            visualCategory.innerHTML = `<h3>${categoryObj.category}</h3>`;
+
+            // إضافة الخدمات لكل قسم
             categoryObj.items.forEach(service => {
+                // A. إضافتها لنموذج الحجز
                 const label = document.createElement('label');
                 label.className = 'checkbox-label';
-                
                 label.innerHTML = `
                     <div>
                         <input type="checkbox" class="service-checkbox" value="${service.price}" data-name="${service.name}">
@@ -665,10 +634,28 @@
                     <span style="color: var(--accent-color); font-weight: bold;">${service.price} ر.س</span>
                 `;
                 servicesContainer.appendChild(label);
+
+                // B. إضافتها لقائمة العرض في الأسفل
+                const descHtml = service.desc ? `<p>${service.desc}</p>` : '';
+                visualCategory.innerHTML += `
+                    <div class="service-item">
+                        <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"></circle></svg></div>
+                        <div class="service-text">
+                            <div class="service-title-row">
+                                <h4>${service.name}</h4>
+                                <span class="service-price">${service.price} ر.س</span>
+                            </div>
+                            ${descHtml}
+                        </div>
+                    </div>
+                `;
             });
+
+            // إلحاق قسم العرض بالصفحة
+            visualGrid.appendChild(visualCategory);
         });
 
-        // 3. Calculate Total Price when checkboxes are clicked
+        // 3. حساب السعر الإجمالي
         const checkboxes = document.querySelectorAll('.service-checkbox');
         const totalPriceDisplay = document.getElementById('total-price-display');
 
@@ -681,7 +668,6 @@
                     }
                 });
                 
-                // Update text
                 if(total > 0) {
                     totalPriceDisplay.textContent = `إجمالي السعر: ${total} ر.س`;
                 } else {
@@ -690,7 +676,7 @@
             });
         });
 
-        // 4. Mobile Menu Logic
+        // 4. منطق القائمة في الجوال
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
         const navLinks = document.querySelectorAll('.nav-link');
